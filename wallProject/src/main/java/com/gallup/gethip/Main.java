@@ -1,8 +1,7 @@
 package com.gallup.gethip;
 
-import com.gallup.gethip.model.Employee;
 import com.gallup.gethip.model.Note;
-import com.gallup.gethip.model.Profile;
+import com.gallup.gethip.model.Wall;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
@@ -33,8 +32,7 @@ public class Main {
 	
 	private static void buildDaos(){
 		try {
-			DataSourceManager.addDao(Employee.class);
-			DataSourceManager.addDao(Profile.class);
+			DataSourceManager.addDao(Wall.class);
 			DataSourceManager.addDao(Note.class);
 			
 			

@@ -16,21 +16,19 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.gallup.gethip.DataSourceManager;
-import com.gallup.gethip.model.Profile;
+import com.gallup.gethip.model.Wall;
 import com.j256.ormlite.dao.Dao;
 
-@Path("/profiles")
-//@Consumes(MediaType.APPLICATION_JSON)
-//@Produces(MediaType.APPLICATION_JSON)
+@Path("/walls")
 public class ProfileResource {
 	
 	@GET
-	@Path("/{profileName}")
+	@Path("/{wallName}")
 	@Produces("application/json")
-	public Profile getProfile(@PathParam("profileName") String profileName) {
-		Profile pro = null;
+	public Wall getWall(@PathParam("wallName") String wallName) {
+		Wall pro = null;
 		try {
-			pro = getDao().queryForId(profileName);
+			pro = getDao().queryForId(wallName);
 			if(pro == null){
 				System.out.println("Error: Profile not found.");
 			}else{
@@ -47,13 +45,13 @@ public class ProfileResource {
 	@POST
     @Produces("application/json")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Profile addProfile(Profile profile) {
+	public Wall addWall(Wall wall) {
 		try {
-			Profile profileAdd = getDao().createIfNotExists(profile);
-			if(profileAdd == null){
+			Wall wallAdd = getDao().createIfNotExists(wall);
+			if(wallAdd == null){
 				// handle error
 			}else{
-				return profileAdd;
+				return wallAdd;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,27 +64,27 @@ public class ProfileResource {
 	@PUT
 	@Produces("text/plain")
     @Consumes("application/json")
-	public String updateProfile(Profile pro) {
+	public String updateWall(Wall pro) {
 		try {
 			int num = getDao().update(pro);
 			if(num == 1){
-				return "Update successful for employee " + pro.getProfileName();
+				return "Update successful for employee " + pro.getWallName();
 			}else{
-				return "Could not update " + pro.getProfileName();
+				return "Could not update " + pro.getWallName();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "Error updating " + pro.getProfileName();
+			return "Error updating " + pro.getWallName();
 		}
 	}
 	
 	 @DELETE
-	 @Path("/{profileName}")
+	 @Path("/{wall}")
 	 @Produces("text/plain")
-	 public String deleteEmployee(@PathParam("profileName") String profileName){
+	 public String deleteWall(@PathParam("wall") String wallName){
 	    try {
-	    	int num = getDao().deleteById(profileName);
+	    	int num = getDao().deleteById(wallName);
 			if(num == 1){
 				return "Profile was deleted successfully";
 			}else{
@@ -98,8 +96,8 @@ public class ProfileResource {
 		}
 	 }
 	
-	 private Dao<Profile, String> getDao(){
-	    Dao<Profile, String> dao = DataSourceManager.getInstance().getDao(Profile.class);
+	 private Dao<Wall, String> getDao(){
+	    Dao<Wall, String> dao = DataSourceManager.getInstance().getDao(Wall.class);
 	    return dao;
 	 }
 	

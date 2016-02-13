@@ -16,7 +16,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.gallup.gethip.DataSourceManager;
-import com.gallup.gethip.model.Employee;
 import com.gallup.gethip.model.Note;
 import com.j256.ormlite.dao.Dao;
 
